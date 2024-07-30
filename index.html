@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Logic Problems</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d2b6ea;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #424f54;
+        }
+        input[type="number"], input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #18c6f1;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #034860;
+        }
+        .result {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>1. Bilangan Prima dari 1 hingga 500</h2>
+        <button onclick="findPrimes()">Temukan Bilangan Prima</button>
+        <div id="primesResult" class="result"></div>
+    </div>
+
+    <div class="container">
+        <h2>2. Hitung Faktorial</h2>
+        <input type="number" id="factorialInput" placeholder="Masukkan angka">
+        <button onclick="calculateFactorial()">Hitung Faktorial</button>
+        <div id="factorialResult" class="result"></div>
+    </div>
+
+    <div class="container">
+        <h2>3. Hitung Luas Lingkaran</h2>
+        <input type="number" id="radiusInput" placeholder="Masukkan jari-jari">
+        <button onclick="calculateCircleArea()">Hitung Luas</button>
+        <div id="circleAreaResult" class="result"></div>
+    </div>
+
+    <div class="container">
+        <h2>4. Tebak Angka</h2>
+        <input type="number" id="guessInput" placeholder="Masukkan tebakan">
+        <button onclick="guessNumber()">Tebak</button>
+        <div id="guessResult" class="result"></div>
+    </div>
+
+    <div class="container">
+        <h2>5. Bilangan Prima dengan 'dan'</h2>
+        <button onclick="findPrimesWithAnd()">Temukan Bilangan Prima dengan 'dan'</button>
+        <div id="primesWithAndResult" class="result"></div>
+    </div>
+
+    <script>
+        // 1. Temukan Bilangan Prima
+        function findPrimes() {
+            let primes = [];
+            for (let i = 2; i <= 500; i++) {
+                let isPrime = true;
+                for (let j = 2; j <= Math.sqrt(i); j++) {
+                    if (i % j === 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime) {
+                    primes.push(i.toString().includes('1') ? `${i}` : i);
+                }
+            }
+            document.getElementById('primesResult').innerText = primes.join(', ');
+        }
+
+        // 2. Hitung Faktorial
+        function calculateFactorial() {
+            let number = document.getElementById('factorialInput').value;
+            let result = 1;
+            for (let i = 1; i <= number; i++) {
+                result *= i;
+            }
+            document.getElementById('factorialResult').innerText = `Faktorial dari ${number} adalah ${result}`;
+        }
+
+        // 3. Hitung Luas Lingkaran
+        function calculateCircleArea() {
+            let radius = document.getElementById('radiusInput').value;
+            let area = Math.PI * radius * radius;
+            document.getElementById('circleAreaResult').innerText = `Luas lingkaran dengan jari-jari ${radius} adalah ${area.toFixed(2)}`;
+        }
+
+        // 4. Tebak Angka
+        let hiddenNumber = Math.floor(Math.random() * 100) + 1;
+        function guessNumber() {
+            let guess = document.getElementById('guessInput').value;
+            if (guess == hiddenNumber) {
+                document.getElementById('guessResult').innerText = 'Tebakan anda benar!';
+            } else if (guess < hiddenNumber) {
+                document.getElementById('guessResult').innerText = 'Tebakan anda terlalu rendah!';
+            } else {
+                document.getElementById('guessResult').innerText = 'Tebakan anda terlalu tinggi!';
+            }
+        }
+
+        // 5. Temukan Bilangan Prima dengan 'dan'
+        function findPrimesWithAnd() {
+            let primes = [];
+            for (let i = 2; i <= 500; i++) {
+                let isPrime = true;
+                for (let j = 2; j <= Math.sqrt(i); j++) {
+                    if (i % j === 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime) {
+                    primes.push(i.toString().includes('1') ? `${i} dan` : i);
+                }
+            }
+            document.getElementById('primesWithAndResult').innerText = primes.join(', ');
+        }
+    </script>
+</body>
+</html>
